@@ -31,14 +31,14 @@ pacman(){
 }
 create_user(){
 	CHECK_USERNAME=`cat /etc/passwd | cut -d":" -f1 | grep "${USERNAME}" &> /dev/null ; echo $?`
-	SUDO=`cat /etc/passwd | cut -d":" -f1 | grep "${USERNAME}" &> /dev/null ; echo $?`
-		if [ "${CHECK_USERNAME}" != "0" ] ; then
-        		useradd -m -g users -G locate,storage,wheel -s /bin/bash "${USERNAME}"
-        		echo "type a password for user : ${USERNAME}"
-		        passwd "${USERNAME}"
-			else
-				echo "user ${USERNAME} exists already. nothing to do"
-		fi
+	SUDO=`pacman -Q sudo &> /dev/null ; echo $?`
+	if [ "${CHECK_USERNAME}" != "0" ] ; then
+        	useradd -m -g users -G locate,storage,wheel -s /bin/bash "${USERNAME}"
+	        echo "type a password for user : ${USERNAME}"
+		passwd "${USERNAME}"
+		else
+			echo "user ${USERNAME} exists already. nothing to do"
+	fi
 
 	# add user to sudoer
 	# check whether sudo is installed
