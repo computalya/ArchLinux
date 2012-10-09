@@ -28,8 +28,12 @@ if [ "$(id -u)" != "0" ]; then
 	exit 1
 fi
 
+SUDO=`pacman -Q sudo &> /dev/null ; echo $?`
+if [ "${CHECK_USERNAME}" != "0" ] ; then
+	pacman -S grub-bios
+fi
+
 mkinitcpio -p linux
-pacman -S grub-bios
 
 grub-mkconfig -o /boot/grub/grub.cfg
 grub-install --recheck /dev/sda
