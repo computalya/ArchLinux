@@ -1,7 +1,7 @@
 #!/bin/bash
 # Author        : Atilla Gündüz
 # Script        : bootstrap
-# Filename	: bootstrap_v1_0.sh
+# Filename	: bootstrap.sh
 # Description   : 
 # Date          : 09. Oct. 2012
 # Last updated  : 09. Oct. 2012
@@ -96,10 +96,6 @@ profile
 timezone
 create_user
 
-echo "D E B U G"
-exit 1
-
-./create_users.sh
 ./rc_update.sh
 
 exit 0
