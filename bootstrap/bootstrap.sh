@@ -22,11 +22,15 @@ pacman(){
 	pacman -Syu
 
 	for i in `cat packages.install` ; do
-		pacman -S "${i}"
+		if { ! `pacman -Q "${i}" &> /dev/null ; echo $?` == 0 ] ; then
+			pacman -S "${i}"
+		fi
 	done
 
 	for i in `cat packages.uninstall` ; do
-		pacman -R "${i}"
+		if { `pacman -Q "${i}" &> /dev/null ; echo $?` == 0 ] ; then
+			pacman -R "${i}"
+		fi
 	done
 }
 create_user(){
@@ -44,7 +48,6 @@ create_user(){
 	# check whether sudo is installed
 	if [ "${SUDO}" != "0" ] ; then
 		echo "sudo is not installed. do pacman -S sudo"
-		exit 1
 		else
 			echo "${USERNAME} ALL=(ALL) ALL" >> /etc/sudoers
 			echo "sudoers udpated"
@@ -112,6 +115,8 @@ timezone
 create_user
 
 ./rc_update.sh
+echo "to start grub installation ENTER"
+read x
 ./grub2.sh
 
 exit 0
