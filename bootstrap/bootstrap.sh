@@ -37,6 +37,7 @@ if [ "$(id -u)" != "0" ]; then
 	exit 1
 fi
 
+hostname
 echo "D E B U G"
 exit 1
 
