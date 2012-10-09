@@ -15,6 +15,21 @@
 #
 ###############################################################################################
 #functions
+profile(){
+	PROFILE="
+	# this has been added from ct_profile.sh
+	#
+	for PROFILE_SCRIPT in \$( ls /etc/profile.d/computalya/*.sh ); do
+	    . \$PROFILE_SCRIPT
+	done"
+
+	echo "${PROFILE}" >> "/etc/profile"
+	echo "/etc/profile updated"
+	
+	cp -R ../etc/profile.d/computalya/ /etc/profile.d/computalya
+	echo "/etc/profile.d/computalya created"
+
+}
 hostname(){
 
 	if [ ! -f /etc/hostname ] ; then
@@ -49,6 +64,7 @@ fi
 
 hostname
 scripts
+profile
 echo "D E B U G"
 exit 1
 
