@@ -87,6 +87,9 @@ LOC="/etc/locale.gen"
 
 # main program
 locale_gen
+locale
+keymap
+consolefont
 
 exit 0
 
