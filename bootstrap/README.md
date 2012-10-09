@@ -10,5 +10,5 @@
 * sudo ./create_users.sh
 * sudo ./timezone.sh
 * sudo ./hostname.sh
-* sudo ./set_keymap.sh
+* sudo ./rc_update.sh
 * sudo ./consolefont.sh
