@@ -10,6 +10,8 @@ if [ "${CHECK}" != "0" ] ; then
         useradd -m -g users -G locate,storage,wheel -s /bin/bash "${USERNAME}"
         echo "type a password for user : ${USERNAME}"
         passwd "${USERNAME}"
+	else
+		echo "user ${USERNAME} exists already. nothing to do"
 fi
 
 exit 0
