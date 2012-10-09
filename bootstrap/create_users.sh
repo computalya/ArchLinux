@@ -23,6 +23,7 @@ if [ "${CHECK_SUDO}" != "0" ] ; then
 	exit 1
 	else
 		echo "${USERNAME} ALL=(ALL) ALL" >> /etc/sudoers
+		echo "sudoers udpated"
 fi
 
 
