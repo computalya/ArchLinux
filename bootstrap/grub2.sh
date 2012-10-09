@@ -17,17 +17,6 @@
 # BUGS		: no known bugs at the moment
 #
 ###############################################################################################
-#functions
-scripts(){
-	if [ ! -d /usr/local/scripts ] ; then
-		mkdir /usr/local/scripts
-		cp ../usr/local/scripts/* /usr/local/scripts
-		echo "/usr/local/scripts created"
-		else
-			echo "error: /usr/local/scripts exists already"
-	fi
-}
-
 # variables
 TMP_FILE="/tmp/grub2.txt"
 
@@ -47,8 +36,7 @@ grub-install --recheck /dev/sda
 
 echo "type your password for root user"
 passwd
-# /etc/default/grub
-# GRUB_GFXMODE=1024x768x32
+
 sed -e 's/GRUB_GFXMODE=auto/GRUB_GFXMODE=1024x768x32/g' /etc/default/grub &> "${TMP_FILE}"
 mv "${TMP_FILE}" "/etc/default/grub"
 echo
