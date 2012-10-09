@@ -26,7 +26,7 @@ pacman_updates(){
 	done
 
 	for i in `cat packages.uninstall` ; do
-		if [ `pacman -Q "${i}" &> /dev/null ; echo $?` == 0 ] ; then
+		if [ `pacman -Q "${i}" &> /dev/null ; echo $?` == 0 ] ; then
 			pacman -R "${i}"
 		fi
 	done
