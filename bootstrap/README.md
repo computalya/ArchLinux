@@ -7,5 +7,4 @@
 * ./bootstrap.sh
 
 * sudo ./create_users.sh
-* sudo ./timezone.sh
 * sudo ./rc_update.sh

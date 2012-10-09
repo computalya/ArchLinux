@@ -15,13 +15,15 @@
 #
 ###############################################################################################
 #functions
+timezone(){
+	if [ ! -e /etc/localtime ] ; then
+		ln -s /usr/share/zoneinfo/Europe/Istanbul /etc/localtime
+		echo "/etc/localtime has been linked to /usr/share/zoneinfo/Europe/Istanbul"
+		else
+			echo "error: /etc/localtime exists already"
+	fi
+}
 profile(){
-	PROFILE="
-	# this has been added from ct_profile.sh
-	#
-	for PROFILE_SCRIPT in \$( ls /etc/profile.d/computalya/*.sh ); do
-	    . \$PROFILE_SCRIPT
-	done"
 
 	echo "${PROFILE}" >> "/etc/profile"
 	echo "/etc/profile updated"
@@ -37,7 +39,6 @@ hostname(){
 		echo "hostname setted to: ${HOSTNAME}"
 		else
 			echo "error: /etc/hostname exists already"
-			exit 1
 	fi
 }
 scripts(){
@@ -47,12 +48,17 @@ scripts(){
 		echo "/usr/local/scripts created"
 		else
 			echo "error: /usr/local/scripts exists already"
-			exit 1
 	fi
 }
 
 # variables
 HOSTNAME="ArchLinux_VB"
+PROFILE="
+# this has been added from ct_profile.sh
+#
+for PROFILE_SCRIPT in \$( ls /etc/profile.d/computalya/*.sh ); do
+	. \$PROFILE_SCRIPT
+done"
 
 # main program
 # chech user 
@@ -65,12 +71,11 @@ fi
 hostname
 scripts
 profile
+timezone
+
 echo "D E B U G"
 exit 1
 
-./timezone.sh
-./ct_profile.sh
-./scripts.sh
 ./create_users.sh
 ./rc_update.sh
 
