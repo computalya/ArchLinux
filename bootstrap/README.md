@@ -11,3 +11,4 @@
 * sudo ./timezone.sh
 * sudo ./hostname.sh
 * sudo ./set_keymap.sh
+* sudo ./consolefont.sh
