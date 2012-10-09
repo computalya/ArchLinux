@@ -21,7 +21,7 @@
 TMP_FILE="/tmp/grub2.txt"
 
 # main program
-# chech user 
+# check user 
 if [ "$(id -u)" != "0" ]; then
 	echo “This script must be run as root” 2>&1
 	echo "sudo ${0}"
@@ -29,7 +29,7 @@ if [ "$(id -u)" != "0" ]; then
 fi
 
 SUDO=`pacman -Q sudo &> /dev/null ; echo $?`
-if [ "${CHECK_USERNAME}" != "0" ] ; then
+if [ "${SUDO}" != "0" ] ; then
 	pacman -S grub-bios
 fi
 
