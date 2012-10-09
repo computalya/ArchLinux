@@ -16,19 +16,17 @@
 #
 ###############################################################################################
 #functions
-pacman(){
-	echo "enter for a pacman system update "
-	read x
+pacman_updates(){
 	pacman -Syu
 
 	for i in `cat packages.install` ; do
-		if { ! `pacman -Q "${i}" &> /dev/null ; echo $?` == 0 ] ; then
+		if [ ! `pacman -Q "${i}" &> /dev/null ; echo $?` == 0 ] ; then
 			pacman -S "${i}"
 		fi
 	done
 
 	for i in `cat packages.uninstall` ; do
-		if { `pacman -Q "${i}" &> /dev/null ; echo $?` == 0 ] ; then
+		if [ `pacman -Q "${i}" &> /dev/null ; echo $?` == 0 ] ; then
 			pacman -R "${i}"
 		fi
 	done
@@ -107,7 +105,10 @@ if [ "$(id -u)" != "0" ]; then
 	exit 1
 fi
 
-pacman
+echo "ENTER for pacman -Syu"
+read x
+pacman_updates
+
 hostname
 scripts
 profile
