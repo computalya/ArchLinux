@@ -86,10 +86,7 @@ RC="/etc/rc.conf"
 LOC="/etc/locale.gen"
 
 # main program
-#keymap
 locale_gen
-#consolefont
-#locale
 
 exit 0
 

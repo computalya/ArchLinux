@@ -97,5 +97,6 @@ timezone
 create_user
 
 ./rc_update.sh
+./grub2.sh
 
 exit 0

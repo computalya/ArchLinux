@@ -9,8 +9,11 @@
 # Installation  : 
 # Change Log    :
 #                 1.0 	first version! 
-# TO DO         :
-#		  - check root user 
+#		  + check root user 
+#		  + mkinitcpio -p linux
+#		  + display resolution to 1024x768
+#		  + grub2 installation
+# TO DO         : -NIL-
 # BUGS		: no known bugs at the moment
 #
 ###############################################################################################
@@ -26,6 +29,7 @@ scripts(){
 }
 
 # variables
+TMP_FILE="/tmp/grub2.txt"
 
 # main program
 # chech user 
@@ -37,12 +41,16 @@ fi
 
 mkinitcpio -p linux
 pacman -S grub-bios
+
 grub-mkconfig -o /boot/grub/grub.cfg
 grub-install --recheck /dev/sda
 
 echo "type your password for root user"
 passwd
-
+# /etc/default/grub
+# GRUB_GFXMODE=1024x768x32
+sed -e 's/GRUB_GFXMODE=auto/GRUB_GFXMODE=1024x768x32/g' /etc/default/grub &> "${TMP_FILE}"
+mv "${TMP_FILE}" "/etc/default/grub"
 echo
 echo "exit ; umount /mnt ; reboot"
 
