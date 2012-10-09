@@ -6,3 +6,4 @@ vim
 sudo
 bash-completion
 grub-bios
+wget
