@@ -9,5 +9,4 @@
 * sudo ./scripts.sh
 * sudo ./create_users.sh
 * sudo ./timezone.sh
-* sudo ./hostname.sh
 * sudo ./rc_update.sh

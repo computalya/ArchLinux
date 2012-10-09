@@ -25,6 +25,12 @@ hostname(){
 			exit 1
 	fi
 }
+scripts(){
+	if [ ! -d /usr/local/scripts ] ; then
+		mkdir /usr/local/scripts
+		cp ../usr/local/scripts/* /usr/local/scripts
+	fi
+}
 
 # variables
 HOSTNAME="ArchLinux_VB"
@@ -38,6 +44,7 @@ if [ "$(id -u)" != "0" ]; then
 fi
 
 hostname
+scripts
 echo "D E B U G"
 exit 1
 
