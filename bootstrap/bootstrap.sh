@@ -98,7 +98,7 @@ for PROFILE_SCRIPT in \$( ls /etc/profile.d/computalya/*.sh ); do
 done"
 
 # main program
-# chech user 
+# check user 
 if [ "$(id -u)" != "0" ]; then
 	echo "This script must be run as root" 2>&1
 	echo "sudo ${0}"
