@@ -7,3 +7,5 @@ My ArchLinux settings and scripts
 + arch-chroot /mnt
 + pacman -S git
 + git clone https://github.com/computalya/ArchLinux
++ cd ArchLinux/bootstrap
++ read README.md
