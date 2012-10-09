@@ -27,7 +27,7 @@ locale_gen (){
 	fi
 
 
-	#locale-gen
+	locale-gen
 }
 
 consolefont (){
