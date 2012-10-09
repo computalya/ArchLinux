@@ -10,10 +10,10 @@ if [ "${CHECK_CONSOLE}" == "0" ] ; then
 		echo "/etc/rc.conf: CONSOLEFONT=\"iso09.16\" exists already"
 		exit 1
 		else 
-			echo "CONSOLEFONT=\"iso09.16\"" >> /etc/rc.conf
+			echo "it exists already a CONSOLEFONT setting in /etc/rc.conf"
 	fi
 	else
-		echo "it exists already a CONSOLEFONT setting in /etc/rc.conf"
+		echo "CONSOLEFONT=\"iso09.16\"" >> /etc/rc.conf
 	
 fi
 
