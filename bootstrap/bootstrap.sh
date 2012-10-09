@@ -14,6 +14,20 @@
 # BUGS		: no known bugs at the moment
 #
 ###############################################################################################
+#functions
+hostname(){
+
+	if [ ! -f /etc/hostname ] ; then
+		echo "${HOSTNAME}" >> /etc/hostname
+		echo "hostname setted to: ${HOSTNAME}"
+		else
+			echo "error: /etc/hostname exists already"
+			exit 1
+	fi
+}
+
+# variables
+HOSTNAME="ArchLinux_VB"
 
 # main program
 # chech user 
@@ -23,8 +37,13 @@ if [ "$(id -u)" != "0" ]; then
 	exit 1
 fi
 
+echo "D E B U G"
+exit 1
+
 ./timezone.sh
 ./ct_profile.sh
 ./scripts.sh
 ./create_users.sh
 ./rc_update.sh
+
+exit 0
