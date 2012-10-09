@@ -11,4 +11,3 @@
 * sudo ./timezone.sh
 * sudo ./hostname.sh
 * sudo ./rc_update.sh
-* sudo ./consolefont.sh
