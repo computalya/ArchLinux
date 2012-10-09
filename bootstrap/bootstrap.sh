@@ -15,6 +15,27 @@
 #
 ###############################################################################################
 #functions
+create_user(){
+	CHECK_USERNAME=`cat /etc/passwd | cut -d":" -f1 | grep "${USERNAME}" &> /dev/null ; echo $?`
+	SUDO=`cat /etc/passwd | cut -d":" -f1 | grep "${USERNAME}" &> /dev/null ; echo $?`
+		if [ "${CHECK_USERNAME}" != "0" ] ; then
+        		useradd -m -g users -G locate,storage,wheel -s /bin/bash "${USERNAME}"
+        		echo "type a password for user : ${USERNAME}"
+		        passwd "${USERNAME}"
+			else
+				echo "user ${USERNAME} exists already. nothing to do"
+		fi
+
+	# add user to sudoer
+	# check whether sudo is installed
+	if [ "${SUDO}" != "0" ] ; then
+		echo "sudo is not installed. do pacman -S sudo"
+		exit 1
+		else
+			echo "${USERNAME} ALL=(ALL) ALL" >> /etc/sudoers
+			echo "sudoers udpated"
+	fi
+}
 timezone(){
 	if [ ! -e /etc/localtime ] ; then
 		ln -s /usr/share/zoneinfo/Europe/Istanbul /etc/localtime
@@ -53,6 +74,7 @@ scripts(){
 
 # variables
 HOSTNAME="ArchLinux_VB"
+USERNAME="computalya"
 PROFILE="
 # this has been added from ct_profile.sh
 #
@@ -72,6 +94,7 @@ hostname
 scripts
 profile
 timezone
+create_user
 
 echo "D E B U G"
 exit 1
