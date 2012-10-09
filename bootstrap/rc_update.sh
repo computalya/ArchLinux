@@ -83,8 +83,7 @@ locale (){
 # variables
 TMP_FILE="/tmp/rc_update.txt"
 RC="/etc/rc.conf"
-#LOC="/etc/locale.gen"
-LOC="locale.gen"
+LOC="/etc/locale.gen"
 
 # main program
 #keymap
