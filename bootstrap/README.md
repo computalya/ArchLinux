@@ -6,5 +6,3 @@
 * cd ArchLinux/bootstrap
 * ./bootstrap.sh
 * ./rc_update.sh
-
-merhaba çiğdem
