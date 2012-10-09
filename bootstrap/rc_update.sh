@@ -6,6 +6,30 @@
 # 
 # VARIABLES
 
+locale_gen (){
+	TR_ISO=`grep -v "#" "${LOC}"  | grep "tr_TR ISO-8859-9" &> /dev/null ; echo $?`
+	TR_UTF8=`grep -v "#" "${LOC}" | grep "tr_TR.UTF-8 UTF-8" &> /dev/null ; echo $?`
+
+	if [ "${TR_ISO}" == "0" ] ; then
+		echo "tr_TR ISO-8859-9 exists already"
+		else
+			sed -e 's/^#tr_TR ISO-8859-9/tr_TR ISO-8859-9/g' "${LOC}" &> "${TMP_FILE}"
+			mv "${TMP_FILE}" "${LOC}"
+			echo "tr_TR ISO-8859-9 added to ${LOC}"
+	fi
+
+	if [ "${TR_UTF8}" == "0" ] ; then
+		echo "tr_TR.UTF-8 UTF-8 exists already"
+		else
+			sed -e 's/^#tr_TR.UTF-8 UTF-8/tr_TR.UTF-8 UTF-8/g' "${LOC}" &> "${TMP_FILE}"
+			mv "${TMP_FILE}" "${LOC}"
+			echo "tr_TR.UTF-8 UTF-8 added to ${LOC}"
+	fi
+
+
+	#locale-gen
+}
+
 consolefont (){
 	# set consolefont in rc.conf
 	# 
@@ -57,12 +81,16 @@ locale (){
 	fi
 }
 # variables
+TMP_FILE="/tmp/rc_update.txt"
 RC="/etc/rc.conf"
+#LOC="/etc/locale.gen"
+LOC="locale.gen"
 
 # main program
-keymap
-consolefont
-locale
+#keymap
+locale_gen
+#consolefont
+#locale
 
 exit 0
 
