@@ -9,12 +9,26 @@
 # Installation  : 
 # Change Log    :
 #                 1.0 	first version! 
+#		  + pacman: system update, remove unnecessary packages and install needed packages
 # TO DO         :
 #		  - check root user 
 # BUGS		: no known bugs at the moment
 #
 ###############################################################################################
 #functions
+pacman(){
+	echo "enter for a pacman system update "
+	read x
+	pacman -Syu
+
+	for i in `cat packages.install` ; do
+		pacman -S "${i}"
+	done
+
+	for i in `cat packages.uninstall` ; do
+		pacman -R "${i}"
+	done
+}
 create_user(){
 	CHECK_USERNAME=`cat /etc/passwd | cut -d":" -f1 | grep "${USERNAME}" &> /dev/null ; echo $?`
 	SUDO=`cat /etc/passwd | cut -d":" -f1 | grep "${USERNAME}" &> /dev/null ; echo $?`
@@ -90,6 +104,7 @@ if [ "$(id -u)" != "0" ]; then
 	exit 1
 fi
 
+pacman
 hostname
 scripts
 profile
