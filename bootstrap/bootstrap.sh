@@ -29,6 +29,10 @@ scripts(){
 	if [ ! -d /usr/local/scripts ] ; then
 		mkdir /usr/local/scripts
 		cp ../usr/local/scripts/* /usr/local/scripts
+		echo "/usr/local/scripts created"
+		else
+			echo "error: /usr/local/scripts exists already"
+			exit 1
 	fi
 }
 
