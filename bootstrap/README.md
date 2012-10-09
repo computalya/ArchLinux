@@ -8,3 +8,6 @@
 * sudo ./ct_profile.sh
 * sudo ./scripts.sh
 * sudo ./create_users.sh
+* sudo ./timezone.sh
+* sudo ./hostname.sh
+* sudo ./set_keymap.sh
