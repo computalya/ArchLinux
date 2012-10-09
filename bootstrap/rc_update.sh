@@ -19,8 +19,7 @@ locale (){
 	fi
 }
 # variables
-#RC="/etc/rc.conf"
-RC="rc.conf"
+RC="/etc/rc.conf"
 
 # main program
 locale
