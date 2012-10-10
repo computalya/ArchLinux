@@ -10,6 +10,7 @@
 # Change Log    :
 #                 1.0 	first version! 
 #		  + pacman: system update, remove unnecessary packages and install needed packages
+#		  + vimrc: vim color syntax on
 # TO DO         :
 #		  - check root user 
 # BUGS		: no known bugs at the moment
@@ -25,7 +26,6 @@ vimrc(){
 		else
 			echo "error: syntax on exists already in /etc/vimrc"
 	fi
-	exit 1
 }
 
 pacman_updates(){
@@ -116,8 +116,6 @@ if [ "$(id -u)" != "0" ]; then
 	echo "sudo ${0}"
 	exit 1
 fi
-vimrc
-exit 1
 
 echo "ENTER for pacman -Syu"
 read x
@@ -126,6 +124,7 @@ pacman_updates
 hostname
 scripts
 profile
+vimrc
 timezone
 create_user
 
