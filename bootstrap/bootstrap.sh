@@ -16,6 +16,16 @@
 #
 ###############################################################################################
 #functions
+vimrc(){
+	echo "hallo"
+	if [ ! `cat /etc/vimrc | grep "syntax on" &> /dev/null ; echo $?` ] ; then
+		echo "vimrc yok"
+		else
+			"vimrc var"
+	fi
+	exit 1
+}
+
 pacman_updates(){
 	pacman -Syu
 
@@ -104,6 +114,8 @@ if [ "$(id -u)" != "0" ]; then
 	echo "sudo ${0}"
 	exit 1
 fi
+vimrc
+exit 1
 
 echo "ENTER for pacman -Syu"
 read x
