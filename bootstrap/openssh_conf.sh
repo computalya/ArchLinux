@@ -31,8 +31,6 @@ SSH_USERS="root computalya"		# this users will be configured for passwordless lo
 IP=`ip addr list eth0 | grep "inet" | cut -d' ' -f6 | cut -d/ -f1 | head -1`
 
 # main program
-daemons
-exit 1
 # check user 
 if [ "$(id -u)" != "0" ]; then
 	echo “This script must be run as root” 2>&1
@@ -75,9 +73,6 @@ done
 rm /root/id_rsa.pub
 echo "/root/id_rsa.pub removed"
 /etc/rc.d/sshd restart
-systemctl enable sshd.service
-# check if DAEMONS exists in rc.conf
-# if yes show current DAEMONS
-# check if sshd exists, if not add it at the end
-# if not add DAEMONS=('crond' 'network' 'sshd' 'syslog-ng')
+daemons
+
 exit 0
