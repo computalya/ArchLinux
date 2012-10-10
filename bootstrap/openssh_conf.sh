@@ -30,9 +30,10 @@ for i in `echo $SSH_USERS` ; do
 	HOME_DIR=`cat /etc/passwd | grep "${i}" | cut -d":" -f6`
 	# create .ssh
 	if [ ! -d "${HOME_DIR}/.ssh" ] ; then
-		su "${i}" -c "echo $HOME_DIR/.ssh"
+		su "${i}" -c "mkdir $HOME_DIR/.ssh"
+		echo "$HOME_DIR created"
 		else
-			echo "$HOME_DIR/.ssh zaten var"
+			echo "info -> $HOME_DIR/.ssh exist already"
 	fi
 done
 
