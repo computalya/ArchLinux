@@ -58,7 +58,8 @@ for i in `echo $SSH_USERS` ; do
 	echo "authorized_keys created for $i"
 done
 
-# rm /root/id_rsa.pub
-# echo "/root/id_rsa.pub removed"
+rm /root/id_rsa.pub
+echo "/root/id_rsa.pub removed"
+/etc/rc.d/sshd restart
 
 exit 0
