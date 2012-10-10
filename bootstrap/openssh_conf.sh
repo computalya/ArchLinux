@@ -15,6 +15,7 @@
 #
 ###############################################################################################
 # variables
+SSH_USERS="root computalya"		# this users will be configured for passwordless login
 
 # main program
 # check user 
@@ -23,5 +24,9 @@ if [ "$(id -u)" != "0" ]; then
 	echo "sudo ${0}"
 	exit 1
 fi
+
+for i in `echo $SSH_USERS` ; do
+	echo $i
+done
 
 exit 0
