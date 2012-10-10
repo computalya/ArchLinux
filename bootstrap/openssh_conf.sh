@@ -14,11 +14,25 @@
 # BUGS		: no known bugs at the moment
 #
 ###############################################################################################
+# functions
+
+daemons(){
+	DAEMONS=`cat /etc/rc.conf | grep "DAEMONS" &> /dev/null ; echo $?`
+	echo $DAEMONS
+	if [ ${DAEMONS} != 0 ] ; then
+		echo "DAEMONS=('crond' 'network' 'sshd' 'syslog' )"  >> /etc/rc.conf
+		echo "DAEMONS=('crond' 'network' 'sshd' 'syslog' ) added -> /etc/rc.conf"
+		else
+			echo "error: DAEMONS exists already in /etc/rc.conf"
+	fi
+}
 # variables
 SSH_USERS="root computalya"		# this users will be configured for passwordless login
 IP=`ip addr list eth0 | grep "inet" | cut -d' ' -f6 | cut -d/ -f1 | head -1`
 
 # main program
+daemons
+exit 1
 # check user 
 if [ "$(id -u)" != "0" ]; then
 	echo “This script must be run as root” 2>&1
