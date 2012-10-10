@@ -26,8 +26,9 @@ if [ "$(id -u)" != "0" ]; then
 fi
 
 for i in `echo $SSH_USERS` ; do
-	su - "${i}" -c "echo $HOME"
-	
+	# find home directory of each user
+	HOME_DIR=`cat /etc/passwd | grep "${i}" | cut -d":" -f6`
+	su "${i}" -c "echo $HOME_DIR"
 done
 
 exit 0
