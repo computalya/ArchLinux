@@ -35,7 +35,7 @@ if [ -f "${HOME}/.ssh/id_rsa.pub" ] ; then
 		echo "copy your publich id -id_rsa.pub- to $HOME/.ssh"
 		echo "from the machine where the key is located"
 #		echo "cat ~/.ssh/*.pub | ssh root@$IP 'cat>>.ssh/authorized_keys'"
-		echo "scp /.ssh/*.pub root@192.168.1.26:/root
+		echo "scp ~/.ssh/*.pub root@192.168.1.26:/root"
 		exit 1
 fi
 
