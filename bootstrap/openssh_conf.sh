@@ -28,7 +28,11 @@ fi
 for i in `echo $SSH_USERS` ; do
 	# find home directory of each user
 	HOME_DIR=`cat /etc/passwd | grep "${i}" | cut -d":" -f6`
-	su "${i}" -c "echo $HOME_DIR"
+	if [ ! -d "${HOME_DIR}" ] ; then
+		su "${i}" -c "echo $HOME_DIR"
+		else
+			echo "$HOME_DIR zaten var"
+	fi
 done
 
 exit 0
