@@ -16,6 +16,7 @@
 ###############################################################################################
 # variables
 SSH_USERS="root computalya"		# this users will be configured for passwordless login
+IP=`ip addr list eth0 | grep "inet" | cut -d' ' -f6 | cut -d/ -f1 | head -1`
 
 # main program
 # check user 
@@ -31,7 +32,9 @@ if [ -f "${HOME}/.ssh/id_rsa.pub" ] ; then
 	echo "if it is NOT the correct one, save it and copy the correct one with this command"
 	exit 1
 	else
-		echo "moment"
+		echo "copy your publich id -id_rsa.pub- to $HOME/.ssh"
+		echo "from the machine where the key is located"
+		echo "cat ~/.ssh/*.pub | ssh root@$IP 'cat>>.ssh/authorized_keys'"
 		exit 1
 fi
 
