@@ -11,8 +11,9 @@
 #                 1.0 	first version! 
 #		  + pacman: system update, remove unnecessary packages and install needed packages
 #		  + vimrc: vim color syntax on
+#		  + check root user 
 # TO DO         :
-#		  - check root user 
+#		  - add support for remarks in packages.* files
 # BUGS		: no known bugs at the moment
 #
 ###############################################################################################
@@ -33,13 +34,13 @@ pacman_updates(){
 
 	for i in `cat packages.install` ; do
 		if [ ! `pacman -Q "${i}" &> /dev/null ; echo $?` == 0 ] ; then
-			pacman -S "${i}"
+			pacman -S "${i}" --noconfirm
 		fi
 	done
 
 	for i in `cat packages.uninstall` ; do
 		if [ `pacman -Q "${i}" &> /dev/null ; echo $?` == 0 ] ; then
-			pacman -R "${i}"
+			pacman -R "${i}" --noconfirm
 		fi
 	done
 }
