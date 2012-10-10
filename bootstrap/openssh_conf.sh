@@ -27,7 +27,7 @@ if [ "$(id -u)" != "0" ]; then
 fi
 
 # check for public key
-if [ -f "${HOME}/.ssh/id_rsa.pub" ] ; then
+if [ -f "${HOME}/id_rsa.pub" ] ; then
 	echo "it exists alread an $HOME/.ssh/id_rsa.pub"
 	echo "if it is NOT the correct one, save it and copy the correct one with this command"
 	exit 1
