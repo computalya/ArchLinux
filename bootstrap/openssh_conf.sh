@@ -48,11 +48,13 @@ for i in `echo $SSH_USERS` ; do
 		su "${i}" -c "mkdir $HOME_DIR/.ssh"
 		echo "$HOME_DIR created"
 
-		su "${i}" -c "cat /root/id_rsa.pub >> $HOME_DIR/.ssh/authorized_keys"
 		else
 			echo "info -> $HOME_DIR/.ssh exist already"
 	fi
 done
+
+su "${i}" -c "cat /root/id_rsa.pub >> $HOME_DIR/.ssh/authorized_keys"
+echo "authorized_keys created for $i"
 # rm /root/id_rsa.pub
 # echo "/root/id_rsa.pub removed"
 
