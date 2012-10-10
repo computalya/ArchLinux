@@ -4,7 +4,7 @@
 # Filename	: bootstrap.sh
 # Description   : 
 # Date          : 09. Oct. 2012
-# Last updated  : 09. Oct. 2012
+# Last updated  : 10. Oct. 2012
 # Version       : 1.0
 # Installation  : 
 # Change Log    :
@@ -12,8 +12,8 @@
 #		  + pacman: system update, remove unnecessary packages and install needed packages
 #		  + vimrc: vim color syntax on
 #		  + check root user 
+#		  + add support for remarks in packages.* files
 # TO DO         :
-#		  - add support for remarks in packages.* files
 # BUGS		: no known bugs at the moment
 #
 ###############################################################################################
@@ -32,13 +32,13 @@ vimrc(){
 pacman_updates(){
 	pacman -Syu
 
-	for i in `cat packages.install` ; do
+	for i in `cat packages.install | sed 's/ *[#;].*$//g' | sed 's/^ *//' | sed '/^$/d'` ; do
 		if [ ! `pacman -Q "${i}" &> /dev/null ; echo $?` == 0 ] ; then
 			pacman -S "${i}" --noconfirm
 		fi
 	done
 
-	for i in `cat packages.uninstall` ; do
+	for i in `cat packages.uninstall | sed 's/ *[#;].*$//g' | sed 's/^ *//' | sed '/^$/d'` ; do
 		if [ `pacman -Q "${i}" &> /dev/null ; echo $?` == 0 ] ; then
 			pacman -R "${i}" --noconfirm
 		fi
