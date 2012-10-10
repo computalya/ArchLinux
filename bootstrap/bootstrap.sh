@@ -20,7 +20,10 @@ vimrc(){
 	VIMRC=`cat /etc/vimrc | grep "syntax on" &> /dev/null ; echo $?`
 	echo $VIMRC
 	if [ ${VIMRC} != 0 ] ; then
-		echo "ok"
+		echo "syntax on" >> /etc/vimrc
+		echo "syntax on added to /etc/vimrc"
+		else
+			echo "error: syntax on exists already in /etc/vimrc"
 	fi
 	exit 1
 }
