@@ -51,10 +51,13 @@ for i in `echo $SSH_USERS` ; do
 		else
 			echo "info -> $HOME_DIR/.ssh exist already"
 	fi
+
+	# create authorized_keys
+#	su "${i}" -c "cat /root/id_rsa.pub >> $HOME_DIR/.ssh/authorized_keys"
+	cat /root/id_rsa.pub >> $HOME_DIR/.ssh/authorized_keys
+	echo "authorized_keys created for $i"
 done
 
-su "${i}" -c "cat /root/id_rsa.pub >> $HOME_DIR/.ssh/authorized_keys"
-echo "authorized_keys created for $i"
 # rm /root/id_rsa.pub
 # echo "/root/id_rsa.pub removed"
 
