@@ -26,7 +26,8 @@ if [ "$(id -u)" != "0" ]; then
 fi
 
 for i in `echo $SSH_USERS` ; do
-	echo $i
+	su - "${i}" -c "echo $HOME"
+	
 done
 
 exit 0
