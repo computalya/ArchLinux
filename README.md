@@ -9,5 +9,3 @@ My ArchLinux settings and scripts
 + git clone https://github.com/computalya/ArchLinux
 + cd ArchLinux/bootstrap
 + read README.md
-.
-.
