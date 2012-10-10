@@ -21,6 +21,7 @@ vimrc(){
 	echo $VIMRC
 	if [ ${VIMRC} != 0 ] ; then
 		echo "ok"
+	fi
 	exit 1
 }
 
