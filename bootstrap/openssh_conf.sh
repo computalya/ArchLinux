@@ -20,8 +20,8 @@ daemons(){
 	DAEMONS=`cat /etc/rc.conf | grep "DAEMONS" &> /dev/null ; echo $?`
 	echo $DAEMONS
 	if [ ${DAEMONS} != 0 ] ; then
-		echo "DAEMONS=('crond' 'network' 'sshd' 'syslog' )"  >> /etc/rc.conf
-		echo "DAEMONS=('crond' 'network' 'sshd' 'syslog' ) added -> /etc/rc.conf"
+		echo "DAEMONS=('syslog-ng' 'network' 'crond' 'sshd' )"  >> /etc/rc.conf
+		echo "DAEMONS=('syslog-ng' 'network' 'crond' 'sshd' ) added -> /etc/rc.conf"
 		else
 			echo "error: DAEMONS exists already in /etc/rc.conf"
 	fi
