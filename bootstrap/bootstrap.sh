@@ -19,12 +19,8 @@
 vimrc(){
 	VIMRC=`cat /etc/vimrc | grep "syntax on" &> /dev/null ; echo $?`
 	echo $VIMRC
-	exit 1
-	if [ ! ] ; then
-		echo "vimrc yok"
-		else
-			"vimrc var"
-	fi
+	if [ ${VIMRC} != 0 ] ; then
+		echo "ok"
 	exit 1
 }
 
