@@ -28,10 +28,11 @@ fi
 for i in `echo $SSH_USERS` ; do
 	# find home directory of each user
 	HOME_DIR=`cat /etc/passwd | grep "${i}" | cut -d":" -f6`
-	if [ ! -d "${HOME_DIR}" ] ; then
-		su "${i}" -c "echo $HOME_DIR"
+	# create .ssh
+	if [ ! -d "${HOME_DIR}/.ssh" ] ; then
+		su "${i}" -c "echo $HOME_DIR/.ssh"
 		else
-			echo "$HOME_DIR zaten var"
+			echo "$HOME_DIR/.ssh zaten var"
 	fi
 done
 
