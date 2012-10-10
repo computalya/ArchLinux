@@ -25,6 +25,16 @@ if [ "$(id -u)" != "0" ]; then
 	exit 1
 fi
 
+# check for public key
+if [ -f "${HOME}/.ssh/id_rsa.pub" ] ; then
+	echo "it exists alread an $HOME/.ssh/id_rsa.pub"
+	echo "if it is NOT the correct one, save it and copy the correct one with this command"
+	exit 1
+	else
+		echo "moment"
+		exit 1
+fi
+
 for i in `echo $SSH_USERS` ; do
 	# find home directory of each user
 	HOME_DIR=`cat /etc/passwd | grep "${i}" | cut -d":" -f6`
