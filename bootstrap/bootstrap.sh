@@ -17,8 +17,10 @@
 ###############################################################################################
 #functions
 vimrc(){
-	echo "hallo"
-	if [ ! `cat /etc/vimrc | grep "syntax on" &> /dev/null ; echo $?` ] ; then
+	VIMRC=`cat /etc/vimrc | grep "syntax on" &> /dev/null ; echo $?`
+	echo $VIMRC
+	exit 1
+	if [ ! ] ; then
 		echo "vimrc yok"
 		else
 			"vimrc var"
