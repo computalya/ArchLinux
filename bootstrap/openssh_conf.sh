@@ -61,5 +61,9 @@ done
 rm /root/id_rsa.pub
 echo "/root/id_rsa.pub removed"
 /etc/rc.d/sshd restart
-
+systemctl enable sshd.service
+# check if DAEMONS exists in rc.conf
+# if yes show current DAEMONS
+# check if sshd exists, if not add it at the end
+# if not add DAEMONS=('crond' 'network' 'sshd' 'syslog-ng')
 exit 0
