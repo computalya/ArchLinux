@@ -28,8 +28,11 @@ fi
 
 # check for public key
 if [ -f "${HOME}/id_rsa.pub" ] ; then
-	echo "it exists alread an $HOME/.ssh/id_rsa.pub"
-	echo "if it is NOT the correct one, save it and copy the correct one with this command"
+	echo "it exists already a $HOME/id_rsa.pub"
+	echo "if it is NOT the correct one CTRL+C"
+	echo "if it is the correct one ENTER to continue..."
+	read X
+	echo "ok"
 	exit 1
 	else
 		echo "copy your publich id -id_rsa.pub- to $HOME/.ssh"
