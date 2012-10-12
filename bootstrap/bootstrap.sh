@@ -123,8 +123,6 @@ if [ "$(id -u)" != "0" ]; then
 	echo "sudo ${0}"
 	exit 1
 fi
-ip_banner
-exit 1
 
 echo "ENTER for pacman -Syu"
 read x
@@ -135,6 +133,7 @@ scripts
 profile
 vimrc
 timezone
+ip_banner
 create_user
 
 ./rc_update.sh
