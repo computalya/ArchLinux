@@ -12,3 +12,5 @@ openssh
 # this is needed to use ruby scripts on linux
 libyaml
 ruby
+# optional for apache, and I love it
+lnyx
