@@ -8,6 +8,7 @@ bash-completion
 grub-bios
 wget
 openssh
+links
 # ruby packages for base system
 # this is needed to use ruby scripts on linux
 libyaml
