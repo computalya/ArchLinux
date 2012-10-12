@@ -5,7 +5,7 @@
 # Date          : 12 Oct. 2012
 # Last updated  : 12 Oct. 2012
 # Version       : 1.0
-# Installation  : NIL
+# Installation  : 
 # 		copy this script to /etc/rc.d/ip_banner.sh
 #
 #		echo "/etc/rc.d/ip_banner.sh" >>  /etc/rc.local
@@ -24,6 +24,7 @@ if [ $CHECK != "0" ] ; then
 	else
 		cat $ISSUE | grep -v "IP Address" &> $TMP
 		echo "IP Address : $IP" &>> $TMP
+		echo &>> $TMP
 		mv $TMP $ISSUE
 fi
 
