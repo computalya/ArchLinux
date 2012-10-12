@@ -18,6 +18,12 @@
 #
 ###############################################################################################
 #functions
+ip_banner(){
+	# add ip_banner.sh to rc.local
+	cp ../etc/rc.d/ip_banner.sh /etc/rc.d
+	echo "/etc/rc.d/ip_banner.sh" >>  /etc/rc.local
+	echo "ip_banner.sh added to /etc/rc.local"
+}
 vimrc(){
 	VIMRC=`cat /etc/vimrc | grep "syntax on" &> /dev/null ; echo $?`
 	echo $VIMRC
@@ -117,6 +123,8 @@ if [ "$(id -u)" != "0" ]; then
 	echo "sudo ${0}"
 	exit 1
 fi
+ip_banner
+exit 1
 
 echo "ENTER for pacman -Syu"
 read x
