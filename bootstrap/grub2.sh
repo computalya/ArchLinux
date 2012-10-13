@@ -17,6 +17,17 @@
 # BUGS		: no known bugs at the moment
 #
 ###############################################################################################
+# functions
+bug_fix(){
+	# currently there is an error message during boot of GRUB2
+	# during first boot
+	# error: file `/boot/grub/locale/en.mo.gz` not found.
+	# during second boot
+	# error: file `/boot/grub/locale/tr.mo.gz` not found.
+	# to fix this, this fix is needed
+	cp /usr/share/locale/en@quot/LC_MESSAGES/grub.mo /boot/grub/locale/en.mo
+	cp /usr/share/locale/en@quot/LC_MESSAGES/grub.mo /boot/grub/locale/tr.mo
+}
 # variables
 TMP_FILE="/tmp/grub2.txt"
 
@@ -33,6 +44,7 @@ if [ "${SUDO}" != "0" ] ; then
 	pacman -S grub-bios
 fi
 
+bug_fix
 mkinitcpio -p linux
 
 grub-mkconfig -o /boot/grub/grub.cfg
