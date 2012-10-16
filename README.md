@@ -8,7 +8,7 @@ My ArchLinux settings and scripts
 + arch-chroot /mnt
 + pacman -S git
 + git clone https://github.com/computalya/ArchLinux
-+ cd ArchLinux/2012.10_systemd/bootstrap
++ cd ArchLinux/2012.10/bootstrap
 
 ## for older versions with /etc/rc.conf support
 + genfstab -p /mnt >> /mnt/etc/fstab
