@@ -44,8 +44,8 @@ if [ "${SUDO}" != "0" ] ; then
 	pacman -S grub-bios
 fi
 
-bug_fix
 mkinitcpio -p linux
+bug_fix
 
 grub-mkconfig -o /boot/grub/grub.cfg
 grub-install --recheck /dev/sda
