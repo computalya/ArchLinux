@@ -1,0 +1,17 @@
+unzip
+unrar
+lftp
+git
+vim
+sudo
+bash-completion
+grub-bios
+wget
+openssh
+links
+# ruby packages for base system
+# this is needed to use ruby scripts on linux
+libyaml
+ruby
+# optional for apache, and I love it
+lnyx
