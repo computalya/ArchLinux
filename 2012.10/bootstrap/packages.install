@@ -19,3 +19,5 @@ lnyx
 # systemd-analyze
 python-dbus-common
 python2-dbus
+# virtulbox additions
+virtualbox-guest-modules
