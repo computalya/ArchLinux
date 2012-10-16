@@ -18,19 +18,74 @@
 #
 ###############################################################################################
 #functions
+font (){
+	CONSOLE=`grep -i "FONT" "${VCONSOLE}" &> /dev/null ; echo $?`
+	CONSOLE_VAL=`cat "${VCONSOLE}" | grep -i "FONT" | grep -i "iso09.16" &> /dev/null ; echo $?`
+
+	if [ "${CONSOLE}" == "0" ] ; then
+		if [ "${CONSOLE_VAL}" == "0" ] ; then
+			echo "${VCONSOLE}: FONT=iso09.16 exists already"
+			else 
+				echo "it exists already a FONT setting in ${VCONSOLE}"
+		fi
+		else
+			echo "FONT=iso09.16" >> "${VCONSOLE}"
+			echo "FONT=iso09.16 added to ${VCONSOLE}"
+	
+	fi
+}
+locale (){
+	LOCALE=`grep -i "LOCALE" "${LOCALE}" &> /dev/null ; echo $?`
+	LOCALE_VAL=`cat "${LOCALE_CONF}" | grep -i "LOCALE" | grep -i "tr_TR.UTF8" &> /dev/null ; echo $?`
+
+	if [ "${LOCALE}" == "0" ] ; then
+		if [ "${LOCALE_VAL}" == "0" ] ; then
+			echo "${LOCALE_CONF}: LANG=\"tr_TR.UTF8\" exists already"
+			else 
+				echo "it exists already a LANG setting in ${LOCALE_CONF}"
+		fi
+		else
+			echo "LANG=\"tr_TR.UTF8\"" >> "${LOCALE_CONF}"
+			echo "LANG=\"tr_TR.UTF8\" added to ${LOCALE_CONF}" 
+
+	fi
+}
+locale_gen (){
+	TR_ISO=`grep -v "#" "${LOC}"  | grep "tr_TR ISO-8859-9" &> /dev/null ; echo $?`
+	TR_UTF8=`grep -v "#" "${LOC}" | grep "tr_TR.UTF-8 UTF-8" &> /dev/null ; echo $?`
+
+	if [ "${TR_ISO}" == "0" ] ; then
+		echo "tr_TR ISO-8859-9 exists already"
+		else
+			sed -e 's/^#tr_TR ISO-8859-9/tr_TR ISO-8859-9/g' "${LOC}" &> "${TMP_FILE}"
+			mv "${TMP_FILE}" "${LOC}"
+			echo "tr_TR ISO-8859-9 added to ${LOC}"
+	fi
+
+	if [ "${TR_UTF8}" == "0" ] ; then
+		echo "tr_TR.UTF-8 UTF-8 exists already"
+		else
+			sed -e 's/^#tr_TR.UTF-8 UTF-8/tr_TR.UTF-8 UTF-8/g' "${LOC}" &> "${TMP_FILE}"
+			mv "${TMP_FILE}" "${LOC}"
+			echo "tr_TR.UTF-8 UTF-8 added to ${LOC}"
+	fi
+
+
+	locale-gen
+}
 keymap(){
 	KEYMAP=`grep -i "KEYMAP" "${VCONSOLE}" &> /dev/null ; echo $?`
 	KEYMAP_VAL=`cat "${VCONSOLE}" | grep -i "KEYMAP" | grep -i "trq" &> /dev/null ; echo $?`
 
 	if [ "${KEYMAP}" == "0" ] ; then
 		if [ "${KEYMAP_VAL}" == "0" ] ; then
-			echo "${VCONSOLE}: KEYMAP=\"trq\" exists already"
+			echo "${VCONSOLE}: KEYMAP=trq exists already"
 			else 
 				echo "it exists already a KEYMAP setting in ${VCONSOLE}"
 		fi
 		else
-			echo "KEYMAP=\"trq\"" >> "${VCONSOLE}"
-			echo "KEYMAP=\"trq\" added to ${VCONSOLE}"
+			echo "KEYMAP=trq" >> "${VCONSOLE}"
+			echo "KEYMAP=trq added to ${VCONSOLE}"
 	fi
 }
 ip_banner(){
@@ -130,7 +185,14 @@ PROFILE="
 for PROFILE_SCRIPT in \$( ls /etc/profile.d/computalya/*.sh ); do
 	. \$PROFILE_SCRIPT
 done"
+
 VCONSOLE="/etc/vconsole.conf"
+#SYSLOG="/etc/syslog-ng/syslog-ng.conf"
+SYSLOG="syslog-ng.conf"
+
+TMP_FILE="/tmp/bootstrap.tmp"
+LOC="/etc/locale.gen"
+LOCALE_CONF="/etc/locale.conf"
 
 # main program
 # check user 
@@ -147,6 +209,9 @@ pacman_updates
 hostname
 scripts
 keymap
+font
+locale
+locale-gen
 profile
 vimrc
 timezone
@@ -157,5 +222,9 @@ create_user
 echo "to start grub installation ENTER"
 read x
 ./grub2.sh
+
+# enable services
+# ln -s '/usr/lib/systemd/system/dhcpcd@.service' '/etc/systemd/system/multi-user.target.wants/dhcpcd@eth0.service'
+systemctl enable dhcpcd@eth0.service
 
 exit 0
