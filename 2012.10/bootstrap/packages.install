@@ -9,9 +9,13 @@ grub-bios
 wget
 openssh
 links
+acpi
 # ruby packages for base system
 # this is needed to use ruby scripts on linux
 libyaml
 ruby
 # optional for apache, and I love it
 lnyx
+# systemd-analyze
+python-dbus-common
+python2-dbus
