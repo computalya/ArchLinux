@@ -208,7 +208,7 @@ vhost
 
 systemctl enable httpd
 # ln -s '/usr/lib/systemd/system/httpd.service' '/etc/systemd/system/multi-user.target.wants/httpd.service'
-apachectl start
+apachectl restart
 echo "installation finished"
 echo "visit following sites"
 echo -e "\t http://localhost"
