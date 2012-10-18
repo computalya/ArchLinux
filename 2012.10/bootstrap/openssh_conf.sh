@@ -11,10 +11,18 @@
 #		  + check root user 
 # TO DO         : -NIL-
 #		  * adapt systemd
+#		  -* install_openssh function
 # BUGS		: no known bugs at the moment
 #
 ###############################################################################################
 # functions
+install_openssh(){
+	# 
+	if [ `pacman -Q openssh &> /dev/null ; echo $?` != "0" ] ; then
+		pacman -S openssh --noconfirm
+		systemctl start sshd.service
+	fi
+}
 
 # variables
 SSH_USERS="root computalya"		# this users will be configured for passwordless login
@@ -28,6 +36,8 @@ if [ "$(id -u)" != "0" ]; then
 	exit 1
 fi
 
+install_openssh
+
 # check for public key
 if [ -f "${HOME}/id_rsa.pub" ] ; then
 	echo "it exists already a $HOME/id_rsa.pub"
@@ -39,7 +49,6 @@ if [ -f "${HOME}/id_rsa.pub" ] ; then
 		echo "copy your publich id -id_rsa.pub- to $HOME/.ssh"
 		echo "from the machine where the key is located"
 		echo "scp ~/.ssh/*.pub root@192.168.1.26:/root"
-		systemctl start sshd.service
 
 		exit 1
 fi
