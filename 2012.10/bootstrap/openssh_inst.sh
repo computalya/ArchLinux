@@ -12,6 +12,7 @@
 # TO DO         : -NIL-
 #		  * adapt systemd
 #		  -* install_openssh function
+#		  - add paramater: remove installation
 # BUGS		: no known bugs at the moment
 #
 ###############################################################################################
@@ -48,7 +49,8 @@ if [ -f "${HOME}/id_rsa.pub" ] ; then
 	else
 		echo "copy your publich id -id_rsa.pub- to $HOME/.ssh"
 		echo "from the machine where the key is located"
-		echo "scp ~/.ssh/*.pub root@192.168.1.26:/root"
+		# echo "scp ~/.ssh/*.pub root@192.168.1.26:/root"
+		echo "scp ~/.ssh/*.pub root@$IP:/root"
 
 		exit 1
 fi
