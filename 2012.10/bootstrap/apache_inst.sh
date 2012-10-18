@@ -145,6 +145,8 @@ install_apache
 vhost
 
 #/etc/rc.d/httpd restart
+systemctl enable httpd
+# ln -s '/usr/lib/systemd/system/httpd.service' '/etc/systemd/system/multi-user.target.wants/httpd.service'
 apachectl restart
 echo "installation finished"
 echo "visit following sites"
