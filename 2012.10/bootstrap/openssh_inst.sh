@@ -23,7 +23,7 @@ install_openssh(){
 
 	fi
 	# some keys needed at first time start
-	if [ ! `ls /etc/ssh/*pub* &> /dev/null ; echo $?` ] ; then
+	if [ `ls /etc/ssh/*pub* &> /dev/null ; echo $?` == "2" ] ; then
 		echo "keyler kurulu değil"
 		# ssh-keygen -A
 		else
