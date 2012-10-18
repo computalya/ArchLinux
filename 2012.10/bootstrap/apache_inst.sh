@@ -11,6 +11,8 @@
 #                  	added better info messages
 #                 1.0 	first version! 
 # TO DO         :
+#		  - add usage function
+#		  - add clean up function to remove installation 
 # BUGS		: no known bugs at the moment
 #
 ###############################################################################################
@@ -158,6 +160,8 @@ install_apache(){
 	if [ `pacman -Q lynx &> /dev/null ; echo $?` != "0" ] ; then
 		pacman -S lynx --noconfirm
 	fi
+
+	mkdir /etc/http
 
 	echo -e "127.0.0.1\t$HOSTNAME.localdomain $HOSTNAME" >> /etc/hosts
 	sed "s/^#ServerName.*/ServerName ${HOSTNAME}.${DOMAIN}:80/" $CONF &> $TMP
