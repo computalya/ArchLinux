@@ -123,7 +123,7 @@ HTML2="<!DOCTYPE html>
 
 	HOSTS1=`grep "vhost1.localhost" "/etc/hosts" &> /dev/null ; echo $?`
 
-	if [ "${HOSTS1}" == "0" ] ; then
+	if [ "${HOSTS1}" == "1" ] ; then
 		echo -e "127.0.0.1\tvhost1.localhost" >> /etc/hosts
 		echo "/etc/hosts updated"
 		else
@@ -131,7 +131,7 @@ HTML2="<!DOCTYPE html>
 	fi
 
 	HOSTS2=`grep "vhost2.localhost" "/etc/hosts" &> /dev/null ; echo $?`
-	if [ "${HOSTS2}" == "0" ] ; then
+	if [ "${HOSTS2}" == "1" ] ; then
 		echo -e "127.0.0.1\tvhost2.localhost" >> /etc/hosts
 		echo "/etc/hosts updated"
 		else
@@ -208,7 +208,7 @@ vhost
 
 systemctl enable httpd
 # ln -s '/usr/lib/systemd/system/httpd.service' '/etc/systemd/system/multi-user.target.wants/httpd.service'
-#apachectl restart
+apachectl start
 echo "installation finished"
 echo "visit following sites"
 echo -e "\t http://localhost"
