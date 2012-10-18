@@ -55,10 +55,11 @@ if [ -f "${HOME}/id_rsa.pub" ] ; then
 	read X
 
 	else
-		echo "copy your publich id -id_rsa.pub- to $HOME/.ssh"
-		echo "from the machine where the key is located"
-		# echo "scp ~/.ssh/*.pub root@192.168.1.26:/root"
-		echo "scp ~/.ssh/*.pub root@$IP:/root"
+		echo "- error: copy your publich id -id_rsa.pub- to $HOME/.ssh"
+		echo "         from the machine where the key is located"
+		echo "         scp ~/.ssh/*.pub root@$IP:/root"
+		echo "         and run againg $0"
+		echo 
 
 		exit 1
 fi
