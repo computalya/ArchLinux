@@ -58,7 +58,7 @@ if [ -f "${HOME}/id_rsa.pub" ] ; then
 		echo "- error: copy your publich id -id_rsa.pub- to $HOME/.ssh"
 		echo "         from the machine where the key is located"
 		echo "         scp ~/.ssh/*.pub root@$IP:/root"
-		echo "         and run againg $0"
+		echo "         and run again $0"
 		echo 
 
 		exit 1
@@ -70,23 +70,22 @@ for i in `echo $SSH_USERS` ; do
 	# create .ssh
 	if [ ! -d "${HOME_DIR}/.ssh" ] ; then
 		su "${i}" -c "mkdir $HOME_DIR/.ssh"
-		echo "$HOME_DIR created"
+		echo -e "\t+ $HOME_DIR/.ssh created"
 
 		else
 			echo "info -> $HOME_DIR/.ssh exist already"
 	fi
 
 	# create authorized_keys
-#	su "${i}" -c "cat /root/id_rsa.pub >> $HOME_DIR/.ssh/authorized_keys"
 	cat /root/id_rsa.pub >> $HOME_DIR/.ssh/authorized_keys
-	echo "authorized_keys created for $i"
+	echo -e "\t+ authorized_keys created for $i"
 done
 
 rm /root/id_rsa.pub
-echo "/root/id_rsa.pub removed"
+echo -e "\t+ /root/id_rsa.pub removed"
 
 # systemd services
-systemctl start sshd.service
+systemctl restart sshd.service
 systemctl enable sshd.service
 
 exit 0
