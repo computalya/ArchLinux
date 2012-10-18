@@ -2,30 +2,20 @@
 # Author        : Atilla Gündüz
 # Filename	: openssh_conf.sh
 # Description   : OpenSSH configuration on a ArchLinux env.
-# Date          : 10. Oct. 2012
-# Last updated  : 10. Oct. 2012
-# Version       : 1.0
+# Date          : 18. Oct. 2012
+# Last updated  : 18. Oct. 2012
+# Version       : 1.1
 # Installation  : 
 # Change Log    :
 #                 1.0 	first version! 
+#		  + check root user 
 # TO DO         : -NIL-
-#		  - check root user 
-#		  - mkinitcpio -p linux
+#		  * adapt systemd
 # BUGS		: no known bugs at the moment
 #
 ###############################################################################################
 # functions
 
-daemons(){
-	DAEMONS=`cat /etc/rc.conf | grep "DAEMONS" &> /dev/null ; echo $?`
-	echo $DAEMONS
-	if [ ${DAEMONS} != 0 ] ; then
-		echo "DAEMONS=('syslog-ng' 'network' 'crond' 'sshd' )"  >> /etc/rc.conf
-		echo "DAEMONS=('syslog-ng' 'network' 'crond' 'sshd' ) added -> /etc/rc.conf"
-		else
-			echo "error: DAEMONS exists already in /etc/rc.conf"
-	fi
-}
 # variables
 SSH_USERS="root computalya"		# this users will be configured for passwordless login
 IP=`ip addr list eth0 | grep "inet" | cut -d' ' -f6 | cut -d/ -f1 | head -1`
@@ -72,7 +62,9 @@ done
 
 rm /root/id_rsa.pub
 echo "/root/id_rsa.pub removed"
-/etc/rc.d/sshd restart
-daemons
+
+# systemd services
+systemctl start sshd.service
+systemctl enable sshd.service
 
 exit 0
