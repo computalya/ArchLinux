@@ -2,11 +2,13 @@
 # Author        : Atilla Gündüz
 # Filename	: apache_inst.sh
 # Description   : 
-# Date          : 12. Oct. 2012
-# Last updated  : 12. Oct. 2012
-# Version       : 1.0
+# Date          : 18. Oct. 2012
+# Last updated  : 18. Oct. 2012
+# Version       : 1.1
 # Installation  : 
 # Change Log    :
+#                 1.1 	adapted to systemd
+#                  	added better info messages
 #                 1.0 	first version! 
 # TO DO         :
 # BUGS		: no known bugs at the moment
@@ -77,20 +79,75 @@ HTML2="<!DOCTYPE html>
 	echo "${EXTRA_CONF} updated"
 
 	# create vhosts conf directory
-	mkdir /etc/httpd/conf/extra/vhosts.d
+	if [ ! -d /etc/httpd/conf/extra/vhosts.d ] ; then
+		mkdir /etc/httpd/conf/extra/vhosts.d
+		echo "/etc/httpd/conf/extra/vhosts.d created"
+		else
+			echo "/etc/httpd/conf/extra/vhosts.d exists already"
+			
+	fi
 
 	# create two example vhosts
-	mkdir /srv/http/vhost1
-	mkdir /srv/http/vhost2
+	if [ ! -d /srv/http/vhosts1 ] ; then
+		mkdir /srv/http/vhost1
+		echo "/srv/http/vhost1 created"
+		else
+			echo "/srv/http/vhost1 exists already"
 
-	echo -e "${VHOST_EXAMPLE_1}" &> /etc/httpd/conf/extra/vhosts.d/vhost1.localhost.conf
-	echo -e "${VHOST_EXAMPLE_2}" &> /etc/httpd/conf/extra/vhosts.d/vhost2.localhost.conf
+	fi
 
-	echo -e "127.0.0.1\tvhost1.localhost" >> /etc/hosts
-	echo -e "127.0.0.1\tvhost2.localhost" >> /etc/hosts
+	if [ ! -d /srv/http/vhosts2 ] ; then
+		mkdir /srv/http/vhost2
+		echo "/srv/http/vhost2 created"
+		else
+			echo "/srv/http/vhost2 exists already"
 
-	echo $HTML1 > "/srv/http/vhost1/index.html"
-	echo $HTML2 > "/srv/http/vhost2/index.html"
+	fi
+
+	if [ ! -f /etc/httpd/conf/extra/vhosts.d/vhost1.localhost.conf ] ; then
+		echo -e "${VHOST_EXAMPLE_1}" &> /etc/httpd/conf/extra/vhosts.d/vhost1.localhost.conf
+		echo "/etc/httpd/conf/extra/vhosts.d/vhost1.localhost.conf created"
+		else
+			echo "/etc/httpd/conf/extra/vhosts.d/vhost1.localhost.conf exists already"
+	fi
+
+	if [ ! -f /etc/httpd/conf/extra/vhosts.d/vhost2.localhost.conf ] ; then
+		echo -e "${VHOST_EXAMPLE_2}" &> /etc/httpd/conf/extra/vhosts.d/vhost2.localhost.conf
+		echo "/etc/httpd/conf/extra/vhosts.d/vhost2.localhost.conf created"
+		else
+			echo "/etc/httpd/conf/extra/vhosts.d/vhost2.localhost.conf exists already"
+	fi
+
+	HOSTS1=`grep "vhost1.localhost" "/etc/hosts" &> /dev/null ; echo $?`
+
+	if [ "${HOSTS1}" == "0" ] ; then
+		echo -e "127.0.0.1\tvhost1.localhost" >> /etc/hosts
+		echo "/etc/hosts updated"
+		else
+			echo -e "error: /etc/hosts includes already: 127.0.0.1\tvhost1.localhost"
+	fi
+
+	HOSTS2=`grep "vhost2.localhost" "/etc/hosts" &> /dev/null ; echo $?`
+	if [ "${HOSTS2}" == "0" ] ; then
+		echo -e "127.0.0.1\tvhost2.localhost" >> /etc/hosts
+		echo "/etc/hosts updated"
+		else
+			echo -e "error: /etc/hosts includes already: 127.0.0.1\tvhost2.localhost"
+	fi
+
+	if [ ! -f /srv/http/vhost1/index.html ] ; then
+		echo $HTML1 > "/srv/http/vhost1/index.html"
+		echo "/srv/http/vhost1/index.html created"
+		else
+			echo "/srv/http/vhost1/index.html exists already"
+	fi
+
+	if [ ! -f /srv/http/vhost2/index.html ] ; then
+		echo $HTML2 > "/srv/http/vhost2/index.html"
+		echo "/srv/http/vhost1/index.html created"
+		else
+			echo "/srv/http/vhost2/index.html exists already"
+	fi
 }
 install_apache(){
 	# 
@@ -144,10 +201,9 @@ fi
 install_apache
 vhost
 
-#/etc/rc.d/httpd restart
 systemctl enable httpd
 # ln -s '/usr/lib/systemd/system/httpd.service' '/etc/systemd/system/multi-user.target.wants/httpd.service'
-apachectl restart
+#apachectl restart
 echo "installation finished"
 echo "visit following sites"
 echo -e "\t http://localhost"
