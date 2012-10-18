@@ -39,6 +39,8 @@ if [ -f "${HOME}/id_rsa.pub" ] ; then
 		echo "copy your publich id -id_rsa.pub- to $HOME/.ssh"
 		echo "from the machine where the key is located"
 		echo "scp ~/.ssh/*.pub root@192.168.1.26:/root"
+		systemctl start sshd.service
+
 		exit 1
 fi
 
