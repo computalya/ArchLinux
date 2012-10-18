@@ -25,13 +25,10 @@ install_openssh(){
 	# some keys needed at first time start
 	if [ `ls /etc/ssh/*pub* &> /dev/null ; echo $?` == "2" ] ; then
 		echo "keyler kurulu değil"
-		# ssh-keygen -A
+		ssh-keygen -A
 		else
 			echo "- error: some key exists already in /etc/ssh directory"
 	fi
-
-	echo "DEBUG"
-	exit 1
 
 	systemctl start sshd.service
 }
