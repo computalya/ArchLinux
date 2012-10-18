@@ -15,7 +15,7 @@ acpi
 libyaml
 ruby
 # optional for apache, and I love it
-lnyx
+lynx
 # systemd-analyze
 python-dbus-common
 python2-dbus
