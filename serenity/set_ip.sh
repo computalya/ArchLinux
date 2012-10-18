@@ -20,7 +20,7 @@
 
 # variables
 SETTINGS="CONNECTION='ethernet'\n
-DESCRIPTION='A basic static ethernet connection using iproute\n
+DESCRIPTION='A basic static ethernet connection using iproute'\n
 INTERFACE='eth0'\n
 IP='static'\n
 ADDR='192.168.2.9'\n
