@@ -21,6 +21,9 @@ install_openssh(){
 	# 
 	if [ `pacman -Q openssh &> /dev/null ; echo $?` != "0" ] ; then
 		pacman -S openssh --noconfirm
+
+		# some keys needed at first time start
+		ssh-keygen -A
 		systemctl start sshd.service
 	fi
 }
