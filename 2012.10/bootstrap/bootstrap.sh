@@ -18,6 +18,12 @@
 #
 ###############################################################################################
 #functions
+virtualbox (){
+	# load virtualbox kernel modules
+	echo "vboxguest" >> /etc/modules-load.d/virtualbox.conf
+	echo "vboxsf" >> /etc/modules-load.d/virtualbox.conf
+	echo "vboxvideo" >> /etc/modules-load.d/virtualbox.conf
+}
 font (){
 	CONSOLE=`grep -i "FONT" "${VCONSOLE}" &> /dev/null ; echo $?`
 	CONSOLE_VAL=`cat "${VCONSOLE}" | grep -i "FONT" | grep -i "iso09.16" &> /dev/null ; echo $?`
@@ -214,6 +220,7 @@ locale
 locale-gen
 profile
 vimrc
+virtualbox
 timezone
 ip_banner
 create_user

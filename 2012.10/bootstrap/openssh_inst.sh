@@ -7,11 +7,12 @@
 # Version       : 1.1
 # Installation  : 
 # Change Log    :
+#                 1.1 	first version! 
+#		  	+ adapt systemd
+#		  	+ install_openssh function
 #                 1.0 	first version! 
 #		  + check root user 
 # TO DO         : -NIL-
-#		  * adapt systemd
-#		  -* install_openssh function
 #		  - add paramater: remove installation
 # BUGS		: no known bugs at the moment
 #
