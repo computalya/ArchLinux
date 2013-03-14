@@ -1,0 +1,2 @@
+- rc_update.sh deprecated
+	- overtake changes from rc_update in new bootstrap.sh
