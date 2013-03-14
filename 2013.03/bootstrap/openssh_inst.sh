@@ -50,7 +50,7 @@ fi
 install_openssh
 
 # check for public key
-if [ -f "${HOME}/${"FILE_PUBKEY"}" ] ; then
+if [ -f "${HOME}/${FILE_PUBKEY}" ] ; then
 	echo "it exists already a ${HOME}/${"FILE_PUBKEY"}"
 	echo "if it is NOT the correct one CTRL+C"
 	echo "if it is the correct one ENTER to continue..."
