@@ -79,7 +79,7 @@ for i in `echo $SSH_USERS` ; do
 	fi
 
 	# create authorized_keys
-	cat /root/$"{FILE_PUBKEY}" >> $HOME_DIR/.ssh/authorized_keys
+	cat /root/${FILE_PUBKEY} >> $HOME_DIR/.ssh/authorized_keys
 	echo -e "\t+ authorized_keys created for $i"
 done
 
