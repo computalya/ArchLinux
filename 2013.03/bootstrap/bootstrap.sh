@@ -95,10 +95,9 @@ keymap(){
 	fi
 }
 ip_banner(){
-	# add ip_banner.sh to rc.local
-	cp ../etc/rc.d/ip_banner.sh /etc/rc.d
-	echo "/etc/rc.d/ip_banner.sh" >>  /etc/rc.local
-	echo "ip_banner.sh added to /etc/rc.local"
+	# add ip_banner.sh to login (/etc/issue)
+	echo "/usr/local/scripts/ip_banner.sh" >>  /etc/profile
+	echo "ip_banner.sh added to /etc/profile"
 }
 vimrc(){
 	VIMRC=`cat /etc/vimrc | grep "syntax on" &> /dev/null ; echo $?`
